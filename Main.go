@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"strings"
 )
 
 func main() {
@@ -31,6 +32,5 @@ func main() {
 		log.Fatal(readErr)
 	}
 
-	fmt.Printf("%s", string(body))
-
+	fmt.Printf("$ git commit -m '%s'\n", strings.Trim(string(body), "\n"))
 }
