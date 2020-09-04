@@ -1,24 +1,26 @@
-package main
+package whatthecommit
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
 	"strings"
+	"time"
 )
 
-func main() {
-	url := "http://whatthecommit.com/index.txt"
-	whatThecommitClient := http.Client{
+const url string = "http://whatthecommit.com/index.txt"
+
+// Return a the string from http://whatthecommit.com/index.txt
+func Message() string {
+
+	whatTheCommitClient := http.Client{
 		Timeout: time.Second * 2,
 	}
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	res, getErr := whatThecommitClient.Do(req)
+	res, getErr := whatTheCommitClient.Do(req)
 	if getErr != nil {
 		log.Fatal(getErr)
 	}
@@ -31,6 +33,5 @@ func main() {
 	if readErr != nil {
 		log.Fatal(readErr)
 	}
-
-	fmt.Printf("$ git commit -m '%s'\n", strings.Trim(string(body), "\n"))
+	return strings.Trim(string(body), "\n")
 }
