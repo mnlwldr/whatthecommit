@@ -12,7 +12,7 @@ import (
 
 const url string = "http://whatthecommit.com/index.txt"
 
-// Message Return a the string from http://whatthecommit.com/index.txt
+// Message Return a string from http://whatthecommit.com/index.txt
 func Message() string {
 
 	whatTheCommitClient := http.Client{
